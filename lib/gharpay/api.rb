@@ -9,8 +9,9 @@ module Gharpay
       base_uri "http://services.gharpay.in/rest/GharpayService"
     end
 
-    def initialize(username, password)
+    def initialize(username, password, uri = nil)
       @creds = {"username" => username, "password" => password }
+      base_uri = uri if uri.present?
     end
     
     # Validates whether the location with this pincode is serviced by Gharpay
