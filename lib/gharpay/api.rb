@@ -22,14 +22,14 @@ module Gharpay
     end
 
     # Creates order with Gharpay
-    def create_order(order) 
+    def create_order(order)
       options = {:body => order.to_xml(:root => "transaction"), :headers => @creds.merge('Content-Type' => 'application/xml')}
       res = self.class.post("/createOrder", options)
-      return res['createOrderResponse']['orderID'] unless res['createOrderResponse']['errorMessage']
-      res['createOrderResponse']['errorMessage']
-    rescue
-      return nil 
-    end    
+      return res
+      rescue Exception => e
+       return {:exception => "#{e.message}"}
+      end
+    end
   
     # This method cancels the complete order.
     def cancel_order(cancel_order)
