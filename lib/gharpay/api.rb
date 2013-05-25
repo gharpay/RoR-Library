@@ -26,9 +26,8 @@ module Gharpay
       options = {:body => order.to_xml(:root => "transaction"), :headers => @creds.merge('Content-Type' => 'application/xml')}
       res = self.class.post("/createOrder", options)
       return res
-      rescue Exception => e
-       return {:exception => "#{e.message}"}
-      end
+    rescue Exception => e
+     return {:exception => "#{e.message}"}
     end
   
     # This method cancels the complete order.
